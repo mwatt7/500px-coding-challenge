@@ -11,20 +11,23 @@ class App extends Component {
     super(props);
     this.state = {
       photos: [],
-      query_params : {
-        feature: "popular",
-        image_size: [20, 21, 6]
-      }
+      query_param_feature: "popular",
+      query_param_image_size: [20, 21, 6],
+      query_param_page: 1,
+      query_param_rpp: 20,
     }
   }
 
   build_query( action = default_api_action ) {
     let query = `${api_url}/${action}?`;
     query += `consumer_key=${api_key_500px}`;
-    for ( let param in this.state.query_params ){
-      let value = this.state.query_params[param];
-      if ( value ){
-        query += `&${param}=${value}`;
+    for ( let param in this.state ){
+      if ( param.startsWith('query_param') ){
+        let value = this.state[param];
+        let query_param = param.replace('query_param_','')
+        if ( value ){
+          query += `&${query_param}=${value}`;
+        }
       }
     }
 
@@ -32,10 +35,19 @@ class App extends Component {
 
   }
 
+  queryNextPage() {
+    let nextPage = this.state.query_param_page + 1;
+    this.setState({ query_param_page: nextPage }, function(){
+      this.runQuery();
+    });
+  }
+
   savePhotosToState( api_data ){
     let newPhotoStateData = api_data.photos.map( function(photo){
       let new_photo = {
-        id: photo.id
+        id: photo.id,
+        name: photo.name,
+        description: photo.description,
       }
       let photoImages = {};
       for ( let i in photo.images ){
@@ -47,18 +59,35 @@ class App extends Component {
 
     })
 
-    this.setState({ photos: newPhotoStateData })
+    let oldPhotoStateData = this.state.photos
+    this.setState({ photos: oldPhotoStateData.concat(newPhotoStateData) })
 
   }
 
-  componentDidMount() {
+  onScroll = () => {
+    if ( (window.innerHeight + window.scrollY) >= (document.body.offsetHeight) ) {
+      window.removeEventListener('scroll', this.onScroll, false);
+      this.queryNextPage();
+    }
+  }
+
+  runQuery() {
     fetch( this.build_query() )
       .then(response => response.json())
       .then(data => this.savePhotosToState(data) )
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
+  componentDidMount() {
+    this.runQuery();
+  }
+
   render() {
-    return ( <PhotoCollection photos={this.state.photos} />);
+    window.addEventListener('scroll', this.onScroll, false);
+    return ( <PhotoCollection loadPhotosMethod={() => this.queryNextPage()} photos={this.state.photos} page={this.state.query_param_page} />);
   }
 
 }
