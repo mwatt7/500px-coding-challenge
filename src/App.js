@@ -12,9 +12,9 @@ class App extends Component {
     this.state = {
       photos: [],
       query_param_feature: "popular",
-      query_param_image_size: [20, 21, 6],
+      query_param_image_size: [440, 6],
       query_param_page: 1,
-      query_param_rpp: 20,
+      query_param_rpp: 48,
     }
   }
 

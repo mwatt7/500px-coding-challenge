@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 function LoadPageButton(props) {
-  return <button onClick={props.onClick}>Load More</button>
+  return <button class="loadPageButton" onClick={props.onClick}></button>
 }
 
 export default LoadPageButton;

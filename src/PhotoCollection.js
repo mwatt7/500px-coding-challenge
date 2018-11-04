@@ -7,7 +7,7 @@ class PhotoCollection extends Component {
 	constructor( props ) {
 		super(props);
     this.state = {
-      photo_size_id: 20,
+      photo_size_id: 440,
       modal_photo: null,
       show_modal_description: false,
     }
@@ -18,9 +18,9 @@ class PhotoCollection extends Component {
   }
   closeModal(){
     this.setState({modal_photo: null});
+    this.toggleDescriptionMethod(false);
   }
-  toggleDescriptionMethod(){
-    const showDescription = !this.state.show_modal_description;
+  toggleDescriptionMethod(showDescription = !this.state.show_modal_description){
     this.setState( {show_modal_description: showDescription} );
   }
 
@@ -40,6 +40,10 @@ class PhotoCollection extends Component {
   render() {
     return (
       <div class="page">
+        <div class="pageHeader">
+          <div class="applicationName">Matthew Watt</div>
+          <div class="applicationDescription">500px Coding Challenge</div>
+        </div>
         <div class="photoCollection">
           {this.renderPhotoTileCollection()}
         </div>

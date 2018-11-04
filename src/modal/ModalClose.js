@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 
 function ModalClose(props) {
   return(
-		<button onClick={ props.onClick } >close</button>
+  	<span class="buttons">
+			<button 
+        class="modalIcon modalClose" 
+        onClick={ props.modalCloseMethod } ></button>
+			<button 
+        class="modalIcon toggleDescription" 
+        onClick={ props.toggleDescriptionMethod }></button>
+		</span>
   )
 }
 

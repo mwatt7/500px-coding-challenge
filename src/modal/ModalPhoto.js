@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 function ModalPhoto(props) {
   return(
-    <img src={ props.src } />
+    <img class="fullImage" src={ props.src } />
   )
 }
 
