@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import PhotoCollection from './PhotoCollection.js';
 import './App.css';
 
-const api_key_500px = process.env.REACT_APP_500PX_API_KEY
-const api_root_query = "https://api.500px.com/v1/photos"
+const api_key_500px = process.env.REACT_APP_500PX_API_KEY;
+const api_url = "https://api.500px.com/v1";
+const default_api_action = "photos"
 
 class App extends Component {
-  constructor(props){
+  constructor( props ) {
     super(props);
     this.state = {
       photos: [],
@@ -15,14 +17,13 @@ class App extends Component {
     }
   }
 
-  build_query(){
-    let query = api_root_query + "?";
+  build_query( action = default_api_action ) {
+    let query = `${api_url}/${action}?`;
     query += `consumer_key=${api_key_500px}`;
     for ( let param in this.state.query_params ){
-      let key = param;
       let value = this.state.query_params[param];
       if ( value ){
-        query += `&${key}=${value}`;
+        query += `&${param}=${value}`;
       }
     }
 
@@ -30,14 +31,26 @@ class App extends Component {
 
   }
 
+  savePhotosToState( api_data ){
+    let newPhotoStateData = api_data.photos.map( function(photo){
+      return {
+        id: photo.id,
+        images: photo.images.map(p => p.url),
+      }
+    })
+
+    this.setState({ photos: newPhotoStateData })
+
+  }
+
   componentDidMount() {
     fetch( this.build_query() )
       .then(response => response.json())
-      .then(data => this.setState({ photos: data.photos.map( p => p.image_url) }))
+      .then(data => this.savePhotosToState(data) )
   }
 
   render() {
-    return (<div>{this.state.photos}</div>);
+    return ( <PhotoCollection photos={this.state.photos} />);
   }
 
 }
