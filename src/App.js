@@ -9,13 +9,22 @@ class App extends Component {
     super(props);
     this.state = {
       photos: [],
+      query_params : {
+        feature: "popular",
+      }
     }
   }
 
   build_query(){
     let query = api_root_query + "?";
-    query += "consumer_key=" + api_key_500px;
-    query += "&feature=popular";
+    query += `consumer_key=${api_key_500px}`;
+    for ( let param in this.state.query_params ){
+      let key = param;
+      let value = this.state.query_params[param];
+      if ( value ){
+        query += `&${key}=${value}`;
+      }
+    }
 
     return query;
 
