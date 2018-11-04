@@ -13,6 +13,7 @@ class App extends Component {
       photos: [],
       query_params : {
         feature: "popular",
+        image_size: [20, 21, 6]
       }
     }
   }
@@ -33,10 +34,17 @@ class App extends Component {
 
   savePhotosToState( api_data ){
     let newPhotoStateData = api_data.photos.map( function(photo){
-      return {
-        id: photo.id,
-        images: photo.images.map(p => p.url),
+      let new_photo = {
+        id: photo.id
       }
+      let photoImages = {};
+      for ( let i in photo.images ){
+        photoImages[ photo.images[i]["size"] ] = photo.images[i]["url"];
+      };
+      new_photo.images = photoImages;
+
+      return new_photo;
+
     })
 
     this.setState({ photos: newPhotoStateData })

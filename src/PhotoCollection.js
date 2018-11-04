@@ -4,6 +4,9 @@ import PhotoTile from './PhotoTile.js';
 class PhotoCollection extends Component {
 	constructor( props ) {
 		super(props);
+    this.state = {
+      photo_size_id: 20
+    }
 	}
 
   renderPhotoTileCollection(){
@@ -16,7 +19,7 @@ class PhotoCollection extends Component {
   }
 
   renderPhotoTile(photo){
-    return <PhotoTile key={photo.id} image_url={photo.images[0]} />;
+    return <PhotoTile key={photo.id} image_url={photo.images[ this.state.photo_size_id ]} />;
   }
 
   render() {
