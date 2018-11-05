@@ -22,7 +22,7 @@ Query parameters & data returned by the api were saved as state in App.js. This 
 
 PhotoPage.js holds the view-logic for the page of photos. It tracks information about the browser resolution and calculates the best size of photo to display given that information, as well as display information about the modal. All of this is saved in state. Listeners set on window that listen for resizing events update the resolution attributes, which triggers a re-render with new photo sizes in some cases.
 
-I made an effort to separate view components from functional components. PhotoTile.js, ModalPhoto.js, ModalDescription.js, etc don't even use Class syntax with a constructor - they are simple methods that retuns a block of html.
+I made an effort to separate view components from functional components. PhotoTile.js, ModalPhoto.js, ModalDescription.js, etc don't even use Class syntax with a constructor - they are simple functions that retuns a block of html.
 
 Styling is minimal by design - the app is largely white and dark grey, with blue used only for actions. I used a few icons downloaded from Google's [Material Design](https://material.io/icons) project for buttons. 
 
@@ -34,7 +34,7 @@ If given more time, I'd like to continue development of this project in a few wa
 Curious to spend some time learning how to test React code. 
 
 ##### Query Cusomization
-It would be great if the user had a UI to fine-tune the query. The project was built to anticipate this at the application level so it wouldn't be overly difficult to implement.
+It would be great if the user had a UI to fine-tune the query. The project was built to anticipate this at the application level so it would be fairly simple to implement.
 
 ##### Code Organization
 I made an effort to modularize my code but my sense is that there are some more advanced patterns used in React projects that could make everything more maintainable.
@@ -45,4 +45,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-Thanks again for this fantastic opportunity. I really enjoyed using React for the first time and expect to continue developing that skillset. 
+Thanks again for this fantastic opportunity. I really enjoyed using React for the first time and hope to continue developing that skillset. 
