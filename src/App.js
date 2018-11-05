@@ -12,9 +12,9 @@ class App extends Component {
     this.state = {
       photos: [],
       query_param_feature: "popular",
-      query_param_image_size: [440, 6],
+      query_param_image_size: [1, 2, 3, 100, 200, 440, 600, 6],
       query_param_page: 1,
-      query_param_rpp: 48,
+      query_param_rpp: 60,
     }
   }
 
@@ -77,10 +77,6 @@ class App extends Component {
       .then(data => this.savePhotosToState(data) )
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
-  }
-
   componentDidMount() {
     this.runQuery();
   }
@@ -88,6 +84,10 @@ class App extends Component {
   render() {
     window.addEventListener('scroll', this.onScroll, false);
     return ( <PhotoCollection loadPhotosMethod={() => this.queryNextPage()} photos={this.state.photos} page={this.state.query_param_page} />);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
   }
 
 }
