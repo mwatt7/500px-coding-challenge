@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PhotoCollection from './PhotoCollection.js';
+import PhotoPage from './PhotoPage.js';
 import './App.css';
 
 const api_key_500px = process.env.REACT_APP_500PX_API_KEY;
@@ -83,7 +83,7 @@ class App extends Component {
 
   render() {
     window.addEventListener('scroll', this.onScroll, false);
-    return ( <PhotoCollection loadPhotosMethod={() => this.queryNextPage()} photos={this.state.photos} page={this.state.query_param_page} />);
+    return ( <PhotoPage loadPhotosMethod={() => this.queryNextPage()} photos={this.state.photos} page={this.state.query_param_page} />);
   }
 
   componentWillUnmount() {

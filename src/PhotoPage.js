@@ -3,7 +3,7 @@ import PhotoTile from './PhotoTile.js';
 import LoadPageButton from './LoadPageButton.js';
 import ModalContainer from './modal/ModalContainer.js';
 
-class PhotoCollection extends Component {
+class PhotoPage extends Component {
 	constructor( props ) {
 		super(props);
     this.state = {
@@ -174,4 +174,4 @@ class PhotoCollection extends Component {
 
 }
 
-export default PhotoCollection;
+export default PhotoPage;
