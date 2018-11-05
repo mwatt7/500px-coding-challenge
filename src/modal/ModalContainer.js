@@ -13,7 +13,7 @@ class ModalContainer extends Component {
 	        <ModalClose 
             modalCloseMethod={() => this.props.modalCloseMethod()}
             toggleDescriptionMethod={() => this.props.toggleDescriptionMethod()} />    	
-	        <ModalPhoto src={this.props.modal_photo.images[6]} />
+	        <ModalPhoto alt={this.props.modal_photo.name} src={this.props.modal_photo.images[6]} />
           <PhotoDescription 
             photo={this.props.modal_photo} 
             show_modal_description={this.props.show_modal_description} />   

@@ -90,6 +90,8 @@ class PhotoPage extends Component {
       case 600:
         width = photo_size_id;
         break;
+      default:
+        break;
     }
 
     return width;
@@ -146,6 +148,7 @@ class PhotoPage extends Component {
               key={photo.id} 
               photo_width={ photo_width }
               onClick={() => this.openPhotoModal(photo)} 
+              alt={photo.name} 
               photo={photo} 
               photo_size_id={this.state.photo_size_id} />;
   }

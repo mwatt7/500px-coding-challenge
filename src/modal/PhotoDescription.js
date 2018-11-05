@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function PhotoDescription(props) {
     let containerClass = props.show_modal_description ? "descriptionContainer" : "descriptionContainer collapse";

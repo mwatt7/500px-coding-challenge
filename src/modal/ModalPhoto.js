@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function ModalPhoto(props) {
   return(
-    <img class="fullImage" src={ props.src } />
+    <img alt={ props.alt } class="fullImage" src={ props.src } />
   )
 }
 
