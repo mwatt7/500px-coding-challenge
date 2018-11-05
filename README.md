@@ -1,44 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 500px Coding Challenge
 
-## Available Scripts
+This was a fun exercise and was my first time ever working with React. As a result it was maybe a little more challenging to complete in a quality way than for the average applicant.  
 
-In the project directory, you can run:
+It was also definitely a fun challenge though - I learned A LOT over the course of my weekend which is valuable in and of itself. React is a really interesting framework and I intend to continue my learning over the coming weeks.
 
-### `npm start`
+In particular, I think I will focus my time on developing a better intuition for encapsulation patterns in the context of React - I made an effort to keep my components modular and am reasonably satisfied with the results, but I think there's room for improvement. Similarly, I'd like to explore testing with React - I didn't have the time this weekend to implement testing.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Development
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+I started by using [create-react-app](https://github.com/facebook/create-react-app) to generate a new project. Given my experience with React and the scope of this project, it seemed like an appropriate starting point. If I was working on a production project I would be more deliberate with these choices. Beyond create-react-app, I didn't require any other tools.
 
-### `npm test`
+The **consumer_key** provided to access the API was saved as an environment variable and therefore hasn't been committed to this repository. If you pull & try to run this project, you'll have to address this. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+REACT_APP_500PX_API_KEY = [YOUR_CONSUMER_KEY]
+```
 
-### `npm run build`
+Query parameters & data returned by the api were saved as state in App.js. This had the advantage of triggering a new query & render automatically any time those values changed. Photo data returned from the API is appended to previous photo data which allows for infinite scroll pagination. 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+PhotoPage.js holds the view-logic for the page of photos. It tracks information about the browser resolution and calculates the best size of photo to display given that information, as well as display information about the modal. All of this is saved in state. Listeners set on window that listen for resizing events update the resolution attributes, which triggers a re-render with new photo sizes in some cases.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+I made an effort to separate view components from functional components. PhotoTile.js, ModalPhoto.js, ModalDescription.js, etc don't even use Class syntax with a constructor - they are simple methods that retuns a block of html.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Styling is minimal by design - the app is largely white and dark grey, with blue used only for actions. I used a few icons downloaded from Google's [Material Design](https://material.io/icons) project for buttons. 
 
-### `npm run eject`
+## Future Development
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+If given more time, I'd like to continue development of this project in a few ways:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### Test Suite
+Curious to spend some time learning how to test React code. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### Query Cusomization
+It would be great if the user had a UI to fine-tune the query. The project was built to anticipate this at the application level so it wouldn't be overly difficult to implement.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+##### Code Organization
+I made an effort to modularize my code but my sense is that there are some more advanced patterns used in React projects that could make everything more maintainable.
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Acknowledgments
+
+Thanks again for this fantastic opportunity. I really enjoyed using React for the first time and expect to continue developing that skillset. 
